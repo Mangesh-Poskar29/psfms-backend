@@ -2,6 +2,38 @@ const AdminModel = require('../models/admin')
 const nodemailer = require('nodemailer')
 const env = require('env')
 
+
+// Contact US form Endpoint
+module.exports.contactus = async (req, res) => {
+  const {fullname, email, message} = req.body
+
+  let config = {
+    service: 'gmail',
+    auth: {
+      user: 'thepsfms@gmail.com',
+      pass: 'ycganmlkbuddrype'
+    }
+  }
+
+  let transporter = nodemailer.createTransport(config)
+
+  let msg = {
+    from: email,
+    to: 'thepsfms@gmail.com',
+    subject: 'Someone Contacting Us',
+    html: `<html><body>`+ fullname + ` Trying to contact us through Email - ` + email + `!<br>Message:<br>`+ message + `</body></html>`
+  }
+
+  transporter.sendMail(msg).then(info=>{
+    return res.status(200).send({msg: 'Mail Sent'})
+    console.log('Mail Sent')
+  }).catch(error=>{
+    return res.status(404).send({error: 'Error in sending mail'})
+  })
+
+}
+
+
 // Admin Signup Endpoint
 module.exports.adminsignup = async (req, res) => {
     const {fname, lname, email, password} = req.body
@@ -49,8 +81,6 @@ module.exports.forgotadmin = async (req, res) => {
       res.status(404).send({error: 'Admin not found'})
     }
   
-  
-
     let config = {
       service: 'gmail',
       auth: {

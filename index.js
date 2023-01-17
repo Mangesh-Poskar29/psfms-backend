@@ -28,6 +28,7 @@ mongoose.connect("mongodb+srv://psfms:psfms123@psfms.62vp5y4.mongodb.net/?retryW
 })
 
 // Endpoints
+app.post('/contact-us', adminController.contactus )
 app.post('/admin-signup', adminController.adminsignup )
 app.post('/admin-signin', adminController.adminsignin )
 app.post('/forgot-admin', adminController.forgotadmin)
