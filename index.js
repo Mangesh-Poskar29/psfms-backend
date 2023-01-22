@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const adminController = require('./controller/admin')
+const staffController = require('./controller/staff')
 const cors = require("cors"); // Importing Cors
 
 const app = express()
@@ -27,12 +28,15 @@ mongoose.connect("mongodb+srv://psfms:psfms123@psfms.62vp5y4.mongodb.net/?retryW
   }
 })
 
-// Endpoints
+// Auth Endpoints
 app.post('/contact-us', adminController.contactus )
 app.post('/admin-signup', adminController.adminsignup )
 app.post('/admin-signin', adminController.adminsignin )
 app.post('/forgot-admin', adminController.forgotadmin)
 app.post('/change-password-admin', adminController.changepasswordadmin )
+
+// Admin Dashboard Endpoints
+app.post('/get-staff-data', staffController.getstaffdata )
 
 
 // Listening on port
