@@ -1,3 +1,3 @@
 const mongoose = require('mongoose')
 
-module.exports = mongoose.model('Staff',{ name: String, dob: Date, gender: String, email: String, phone: Number,  permanentAddress: String, temporaryAddress: String, designation: String, serviceStartDate: String, retirementDate: String, schoolJoinDate: Date, qualification: String});   
+module.exports = mongoose.model('Staff',{ name: String, email: String, phone: Number, designation: String, dob: Date, gender: String, permanentAddress: String, temporaryAddress: String,serviceStartDate: Date, retirementDate: Date, schoolJoinDate: Date, qualification: String});   
