@@ -38,6 +38,8 @@ app.post('/change-password-admin', adminController.changepasswordadmin )
 // Admin Dashboard Endpoints
 app.post('/get-staff-data', staffController.getstaffdata )
 app.post('/add-staff-data', staffController.addstaffdata )
+app.put('/update-staff-data/:id', staffController.updatestaffdata )
+app.delete('/delete-staff-data/:id', staffController.deletestaffdata )
 
 
 // Listening on port
