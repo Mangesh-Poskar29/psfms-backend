@@ -13,7 +13,6 @@ module.exports.getstaffdata = async (req, res) => {
 
 module.exports.addstaffdata = async (req, res) => {
   const {name, email, phone, designation, dob, gender, permanentAddress, temporaryAddress, serviceStartDate, retirementDate, schoolJoinDate, qualification} = req.body
-  console.log(req.body)
 
   try {
     const newStaff = new StaffModel({name: name, email: email, phone: phone, designation: designation, dob: dob, gender: gender, permanentAddress: permanentAddress, temporaryAddress: temporaryAddress, serviceStartDate: serviceStartDate, retirementDate: retirementDate, schoolJoinDate: schoolJoinDate, qualification: qualification })
