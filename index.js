@@ -3,6 +3,8 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const adminController = require('./controller/admin')
 const staffController = require('./controller/staff')
+const principalController = require('./controller/principal')
+const staffUserController = require('./controller/staffUser')
 const cors = require("cors"); // Importing Cors
 
 const app = express()
@@ -28,14 +30,28 @@ mongoose.connect("mongodb+srv://psfms:psfms123@psfms.62vp5y4.mongodb.net/?retryW
   }
 })
 
-// Auth Endpoints
-app.post('/contact-us', adminController.contactus )
-app.post('/admin-signup', adminController.adminsignup )
-app.post('/admin-signin', adminController.adminsignin )
+// Admin Auth Endpoints
+app.post('/contact-us', adminController.contactus)
+app.post('/admin-signup', adminController.adminsignup)
+app.post('/admin-signin', adminController.adminsignin)
 app.post('/forgot-admin', adminController.forgotadmin)
 app.post('/change-password-admin', adminController.changepasswordadmin )
 
+// Principal Auth Endpoints
+app.post('/principal-signup', principalController.principalsignup)
+app.post('/principal-signin', principalController.principalsignin)
+app.post('/forgot-principal', principalController.forgotprincipal)
+app.post('/change-password-principal', principalController.changepasswordprincipal)
+
+// StaffUser Auth Endpoints
+app.post('/staff-signup', staffUserController.staffusersignup)
+app.post('/staff-signin', staffUserController.staffusersignin)
+app.post('/forgot-staff', staffUserController.forgotstaffuser)
+app.post('/change-password-staff', staffUserController.changepasswordstaffuser)
+
+
 // Admin Dashboard Endpoints
+// Manage Staff Data Endpoints
 app.post('/get-staff-data', staffController.getstaffdata )
 app.post('/add-staff-data', staffController.addstaffdata )
 app.put('/update-staff-data/:id', staffController.updatestaffdata )

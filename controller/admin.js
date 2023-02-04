@@ -1,6 +1,5 @@
 const AdminModel = require('../models/admin')
 const nodemailer = require('nodemailer')
-const env = require('env')
 
 
 // Contact US form Endpoint
@@ -26,7 +25,6 @@ module.exports.contactus = async (req, res) => {
 
   transporter.sendMail(msg).then(info=>{
     return res.status(200).send({msg: 'Mail Sent'})
-    console.log('Mail Sent')
   }).catch(error=>{
     return res.status(404).send({error: 'Error in sending mail'})
   })
@@ -94,14 +92,12 @@ module.exports.forgotadmin = async (req, res) => {
     let message = {
       from: 'thepsfms@gmail.com',
       to: email,
-      subject: 'OTP for changing password',
+      subject: 'Forget Password(Admin) - OTP',
       text: String(_otp),
       html: `<html><body>OTP for changing the password of your account<br>`+ _otp + `</body></html>`
     }
 
     transporter.sendMail(message).then(info=>{
-      // return res.status(200).send({msg: 'Mail Sent'})
-      console.log('Mail Sent')
       if(info.messageId){
         AdminModel.updateOne({ email }, {otp: _otp}).then(result=>{
           res.status(200).send({msg: 'OTP Sent!',info: info.messageId})
