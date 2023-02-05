@@ -66,6 +66,9 @@ module.exports.adminsignin = async (req, res) => {
         })          
       }
     })
+    .catch(err=>{
+      res.status(404).send({ error: 'User not found' })
+    })
 }
 
 // Forgot Password Endpoint
