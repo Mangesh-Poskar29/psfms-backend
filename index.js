@@ -5,6 +5,7 @@ const adminController = require('./controller/admin')
 const staffController = require('./controller/staff')
 const principalController = require('./controller/principal')
 const staffUserController = require('./controller/staffUser')
+const userController = require('./controller/user')
 const cors = require("cors"); // Importing Cors
 
 const app = express()
@@ -38,13 +39,11 @@ app.post('/forgot-admin', adminController.forgotadmin)
 app.post('/change-password-admin', adminController.changepasswordadmin )
 
 // Principal Auth Endpoints
-app.post('/principal-signup', principalController.principalsignup)
 app.post('/principal-signin', principalController.principalsignin)
 app.post('/forgot-principal', principalController.forgotprincipal)
 app.post('/change-password-principal', principalController.changepasswordprincipal)
 
 // StaffUser Auth Endpoints
-app.post('/staff-signup', staffUserController.staffusersignup)
 app.post('/staff-signin', staffUserController.staffusersignin)
 app.post('/forgot-staff', staffUserController.forgotstaffuser)
 app.post('/change-password-staff', staffUserController.changepasswordstaffuser)
@@ -57,8 +56,15 @@ app.post('/add-staff-data', staffController.addstaffdata )
 app.put('/update-staff-data/:id', staffController.updatestaffdata )
 app.delete('/delete-staff-data/:id', staffController.deletestaffdata )
 
+//Manage Users Endpoints
+app.post('/get-user-data', userController.getuserdata )
+app.delete('/delete-user-data/:id', userController.deleteuserdata )
+app.put('/update-user-data/:id', userController.updateuserdata )
+app.post('/add-principal-user', userController.addprincipaluser)
+app.post('/add-staff-user', userController.addstaffuser)
 
-// Listening on port
+
+// Listening on port 
 app.listen(port, ()=>{
     console.log(`Server is listening on port no. ${port}`)
 })

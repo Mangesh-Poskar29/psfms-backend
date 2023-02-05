@@ -1,28 +1,6 @@
 const StaffUserModel = require('../models/staffUser')
 const nodemailer = require('nodemailer')
 
-// StaffUser Signup Endpoint
-module.exports.staffusersignup = async (req, res) => {
-    const {fname, lname, email, password} = req.body
-    try {
-        const newStaffUser = new StaffUserModel({fname: fname, lname: lname, email: email, password: password})        
-        const oldStaffUser = await StaffUserModel.findOne({email});
-
-        if(oldStaffUser){
-            return res.status(400).send({error: "User already exist!"})
-        }
-        newStaffUser.save().then(()=>{
-            res.status(200).send({ code: 200, msg: 'User added as staff!' })
-          }).catch((err)=>{
-            console.log(err)
-            res.status(400).send({ code: 400, error: 'Internal Error Occured!' })
-          })
-
-    } catch (error) {
-        res.send({ code: 400, error: 'Internal Error Occured!' })
-    }
-}
-
 // StaffUser login endpoint
 module.exports.staffusersignin = async (req, res) => {
     const {email, password} = req.body

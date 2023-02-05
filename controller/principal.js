@@ -1,27 +1,6 @@
 const PrincipalModel = require('../models/principal')
 const nodemailer = require('nodemailer')
 
-// Principal Signup Endpoint
-module.exports.principalsignup = async (req, res) => {
-    const {fname, lname, email, password} = req.body
-    try {
-        const newPrincipal = new PrincipalModel({fname: fname, lname: lname, email: email, password: password})        
-        const oldPrincipal = await PrincipalModel.find()
-
-        if(oldPrincipal.length !== 0){
-            return res.status(400).send({error: "Principal already exists please delete the user if you want to add new user as principal!"})
-        }
-        newPrincipal.save().then(()=>{
-            res.status(200).send({ code: 200, msg: 'User added as principal!' })
-          }).catch((err)=>{
-            res.status(400).send({ code: 400, error: 'Internal Error Occured!' })
-          })
-
-    } catch (error) {
-        res.send({ code: 400, error: 'Internal Error Occured!' })
-    }
-}
-
 // Principal login endpoint
 module.exports.principalsignin = async (req, res) => {
     const {email, password} = req.body
