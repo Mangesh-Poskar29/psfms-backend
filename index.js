@@ -43,6 +43,11 @@ app.post('/principal-signin', principalController.principalsignin)
 app.post('/forgot-principal', principalController.forgotprincipal)
 app.post('/change-password-principal', principalController.changepasswordprincipal)
 
+// Vice Principal Auth Endpoints
+app.post('/viceprincipal-signin', principalController.principalsignin)
+app.post('/forgot-viceprincipal', principalController.forgotprincipal)
+app.post('/change-password-viceprincipal', principalController.changepasswordprincipal)
+
 // StaffUser Auth Endpoints
 app.post('/staff-signin', staffUserController.staffusersignin)
 app.post('/forgot-staff', staffUserController.forgotstaffuser)
@@ -52,15 +57,18 @@ app.post('/change-password-staff', staffUserController.changepasswordstaffuser)
 // Admin Dashboard Endpoints
 // Manage Staff Data Endpoints
 app.post('/get-staff-data', staffController.getstaffdata )
-app.post('/add-staff-data', staffController.addstaffdata )
 app.put('/update-staff-data/:id', staffController.updatestaffdata )
 app.delete('/delete-staff-data/:id', staffController.deletestaffdata )
+app.post('/add-staff-data', staffController.addstaffdata )
+app.post('/add-principal-staff', staffController.addprincipalstaff )
+app.post('/add-viceprincipal-staff', staffController.addviceprincipalstaff )
 
 //Manage Users Endpoints
 app.post('/get-user-data', userController.getuserdata )
 app.delete('/delete-user-data/:id', userController.deleteuserdata )
 app.put('/update-user-data/:id', userController.updateuserdata )
 app.post('/add-principal-user', userController.addprincipaluser)
+app.post('/add-viceprincipal-user', userController.addviceprincipaluser)
 app.post('/add-staff-user', userController.addstaffuser)
 
 
