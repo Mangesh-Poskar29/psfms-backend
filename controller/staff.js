@@ -141,65 +141,25 @@ module.exports.addstaffdata = async (req, res) => {
   }
 }
 
-// Get Total Staff Endpoint
-module.exports.gettotalstaff = async (req, res) => {
+module.exports.staffcount = async (req, res) => {
   try {
-    StaffModel.countDocuments({}, function (err, count) {
-      total = count
-      if (err) {
-        return res.status(400).send({ error: "Internal Server Error" })
-      }
-      return res.status(200).send({ count: total })
-    })
+    const count1 = await StaffModel.countDocuments()
+    const count2 = await PrincipalStaffModel.countDocuments()
+    const count3 = await VicePrincipalStaffModel.countDocuments()
+
+    const totalCount = count1 + count2 + count3
+    res.status(200).send({totalCount})
   } catch (error) {
-    console.log(error)
+      console.error(err);
+      res.status(500).json({ error: 'Server error' });
   }
 }
 
-// Get Principal Staff Endpoint
-module.exports.getprincipalstaff = async (req, res) => {
+
+module.exports.fetchfacility = async (req, res) => {
   try {
-    PrincipalStaffModel.countDocuments({}, function (err, count) {
-      total = count
-      if (err) {
-        return res.status(400).send({ error: "Internal Server Error" })
-      }
-      return res.status(200).send({ count: total })
-    })
+    StaffModel.findOne()
   } catch (error) {
-    console.log(error)
-  }
-}
-
-// Get Vice Principal Staff Endpoint
-module.exports.getviceprincipalstaff = async (req, res) => {
-  try {
-    VicePrincipalStaffModel.countDocuments({}, function (err, count) {
-      total = count
-      if (err) {
-        return res.status(400).send({ error: "Internal Server Error" })
-      }
-      return res.status(200).send({ count: total })
-    })
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-// Assign Role Endpoint
-module.exports.assignfacility = async (req, res) => {
-  const { facility } = req.body
-
-  const { id } = req.params;
-  try {
-    const staffuser = await StaffModel.findByIdAndUpdate({ _id: id }, { $set: { facility: facility } })
-
-    if (staffuser) {
-      return res.status(200).send({ msg: "User Updated!" })
-    } else {
-      return res.status(400).send({ error: "User not found" })
-    }
-  } catch (error) {
-    console.log(error)
+    
   }
 }

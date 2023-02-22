@@ -62,10 +62,8 @@ app.delete('/delete-staff-data/:id', staffController.deletestaffdata )
 app.post('/add-staff-data', staffController.addstaffdata )
 app.post('/add-principal-staff', staffController.addprincipalstaff )
 app.post('/add-viceprincipal-staff', staffController.addviceprincipalstaff )
-app.post('/get-total-staff', staffController.gettotalstaff)
-app.post('/get-principal-staff', staffController.getprincipalstaff)
-app.post('/get-viceprincipal-staff', staffController.getviceprincipalstaff)
-app.post('/assign-facility/:id', staffController.assignfacility)
+app.post('/staff_count', staffController.staffcount)
+app.post('/fetch-facility', staffController.fetchfacility)
 
 //Manage Users Endpoints
 app.post('/get-user-data', userController.getuserdata )
@@ -74,7 +72,8 @@ app.put('/update-user-data/:id', userController.updateuserdata )
 app.post('/add-principal-user', userController.addprincipaluser)
 app.post('/add-viceprincipal-user', userController.addviceprincipaluser)
 app.post('/add-staff-user', userController.addstaffuser)
-app.post('/get-total-users', userController.gettotalusers)
+app.post('/users_count', userController.userscount)
+app.post('/assign-facility/:id', userController.assignfacility)
 
 
 // Listening on port 

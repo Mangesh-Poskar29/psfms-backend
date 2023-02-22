@@ -138,17 +138,35 @@ module.exports.addstaffuser = async (req, res) => {
     }
 }
 
-// Get Total Users Endpoint
-module.exports.gettotalusers = async (req, res) => {
+// Get Total Users Count Endpoint
+module.exports.userscount = async (req, res) => {
     try {
-      StaffUserModel.countDocuments({}, function(err, count){
-        total = count
-        if(err){
-          return res.status(400).send({error: "Internal Server Error"})
-        }
-        return res.status(200).send({count: total})
-      })
+        const count1 = await StaffUserModel.countDocuments()
+        const count2 = await PrincipalModel.countDocuments()
+        const count3 = await VicePrincipalModel.countDocuments()
+
+        const totalCount = count1 + count2 + count3
+        res.status(200).send({ totalCount })
     } catch (error) {
-      
+        console.error(err);
+        res.status(500).json({ error: 'Server error' });
+    }
+}
+
+// Assign Role Endpoint
+module.exports.assignfacility = async (req, res) => {
+    const { facility } = req.body
+  
+    const { id } = req.params;
+    try {
+      const staffuser = await StaffUserModel.findByIdAndUpdate({ _id: id }, { $set: { facility: facility } })
+  
+      if (staffuser) {
+        return res.status(200).send({ msg: "User Updated!" })
+      } else {
+        return res.status(400).send({ error: "User not found" })
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
