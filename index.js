@@ -6,6 +6,7 @@ const staffController = require('./controller/staff')
 const principalController = require('./controller/principal')
 const staffUserController = require('./controller/staffUser')
 const userController = require('./controller/user')
+const uniformController = require('./controller/uniform')
 const cors = require("cors"); // Importing Cors
 
 const app = express()
@@ -63,7 +64,6 @@ app.post('/add-staff-data', staffController.addstaffdata )
 app.post('/add-principal-staff', staffController.addprincipalstaff )
 app.post('/add-viceprincipal-staff', staffController.addviceprincipalstaff )
 app.post('/staff_count', staffController.staffcount)
-app.post('/fetch-facility', staffController.fetchfacility)
 
 //Manage Users Endpoints
 app.post('/get-user-data', userController.getuserdata )
@@ -74,7 +74,13 @@ app.post('/add-viceprincipal-user', userController.addviceprincipaluser)
 app.post('/add-staff-user', userController.addstaffuser)
 app.post('/users_count', userController.userscount)
 app.post('/assign-facility/:id', userController.assignfacility)
+app.post('/fetch-facility', userController.fetchfacility)
 
+// Manage Uniform Facility Endpoints
+app.post('/get-uniform-data', uniformController.getuniformdata )
+app.put('/update-uniform-data/:id', uniformController.updateuniformdata )
+app.delete('/delete-uniform-data/:id', uniformController.deleteuniformdata )
+app.post('/add-uniform-data', uniformController.adduniformdata )
 
 // Listening on port 
 app.listen(port, ()=>{

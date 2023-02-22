@@ -156,17 +156,30 @@ module.exports.userscount = async (req, res) => {
 // Assign Role Endpoint
 module.exports.assignfacility = async (req, res) => {
     const { facility } = req.body
-  
+
     const { id } = req.params;
     try {
-      const staffuser = await StaffUserModel.findByIdAndUpdate({ _id: id }, { $set: { facility: facility } })
-  
-      if (staffuser) {
-        return res.status(200).send({ msg: "User Updated!" })
-      } else {
-        return res.status(400).send({ error: "User not found" })
-      }
+        const staffuser = await StaffUserModel.findByIdAndUpdate({ _id: id }, { $set: { facility: facility } })
+
+        if (staffuser) {
+            return res.status(200).send({ msg: "User Updated!" })
+        } else {
+            return res.status(400).send({ error: "User not found" })
+        }
     } catch (error) {
-      console.log(error)
+        console.log(error)
     }
-  }
+}
+
+// Fetch Facility Endpoint
+module.exports.fetchfacility = async (req, res) => {
+    const email = req.body.email
+    try {
+        const staffUser = await StaffUserModel.findOne({email})
+        const {facility} = staffUser
+        return res.status(200).send({facility})
+
+    } catch (error) {
+
+    }
+}

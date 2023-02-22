@@ -156,10 +156,3 @@ module.exports.staffcount = async (req, res) => {
 }
 
 
-module.exports.fetchfacility = async (req, res) => {
-  try {
-    StaffModel.findOne()
-  } catch (error) {
-    
-  }
-}
