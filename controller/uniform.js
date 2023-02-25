@@ -15,13 +15,13 @@ module.exports.getuniformdata = async (req, res) => {
   
   //Update Staff Data Endpoint
   module.exports.updateuniformdata = async (req, res) => {
-    const { standard, nstudents, ngirls, nboys, uniformsReceivedByGirls, uniformsReceivedByBoys, uniformsToBeReceivedByBoys, uniformsToBeReceivedByGirls, totalUniformsToBeReceived } = req.body
+    const { standard, nstudents, ngirls, nboys, uniformsReceivedByGirls, uniformsReceivedByBoys,totalUniformsReceived, uniformsToBeReceivedByBoys, uniformsToBeReceivedByGirls, totalUniformsToBeReceived } = req.body
   
     const { id } = req.params;
   
     try {
   
-      const uniformData = await uniformModel.findByIdAndUpdate({ _id: id }, { $set: { standard: standard, nstudents: nstudents, ngirls: ngirls, nboys: nboys, uniformsReceivedByGirls: uniformsReceivedByGirls, uniformsReceivedByBoys: uniformsReceivedByBoys, uniformsToBeReceivedByBoys: uniformsToBeReceivedByBoys, uniformsToBeReceivedByGirls: uniformsToBeReceivedByGirls, totalUniformsToBeReceived: totalUniformsToBeReceived } })
+      const uniformData = await uniformModel.findByIdAndUpdate({ _id: id }, { $set: { standard: standard, nstudents: nstudents, ngirls: ngirls, nboys: nboys, uniformsReceivedByGirls: uniformsReceivedByGirls, uniformsReceivedByBoys: uniformsReceivedByBoys, totalUniformsReceived: totalUniformsReceived      , uniformsToBeReceivedByBoys: uniformsToBeReceivedByBoys, uniformsToBeReceivedByGirls: uniformsToBeReceivedByGirls, totalUniformsToBeReceived: totalUniformsToBeReceived } })
   
       if (uniformData) {
         return res.status(200).send({ msg: "Uniform Data Updated!" })
@@ -55,10 +55,10 @@ module.exports.getuniformdata = async (req, res) => {
   
   // Add Uniform Record Endpoint
   module.exports.adduniformdata = async (req, res) => {
-    const { standard, nstudents, ngirls, nboys, uniformsReceivedByGirls, uniformsReceivedByBoys, uniformsToBeReceivedByBoys, uniformsToBeReceivedByGirls, totalUniformsToBeReceived } = req.body
+    const { standard, nstudents, ngirls, nboys, uniformsReceivedByGirls, uniformsReceivedByBoys, totalUniformsReceived, uniformsToBeReceivedByBoys, uniformsToBeReceivedByGirls, totalUniformsToBeReceived } = req.body
   
     try {
-      const newUniform = new uniformModel({ standard: standard, nstudents: nstudents, ngirls: ngirls, nboys: nboys, uniformsReceivedByGirls: uniformsReceivedByGirls, uniformsReceivedByBoys: uniformsReceivedByBoys, uniformsToBeReceivedByBoys: uniformsToBeReceivedByBoys, uniformsToBeReceivedByGirls: uniformsToBeReceivedByGirls, totalUniformsToBeReceived: totalUniformsToBeReceived })
+      const newUniform = new uniformModel({ standard: standard, nstudents: nstudents, ngirls: ngirls, nboys: nboys, uniformsReceivedByGirls: uniformsReceivedByGirls, uniformsReceivedByBoys: uniformsReceivedByBoys, totalUniformsReceived: totalUniformsReceived, uniformsToBeReceivedByBoys: uniformsToBeReceivedByBoys, uniformsToBeReceivedByGirls: uniformsToBeReceivedByGirls, totalUniformsToBeReceived: totalUniformsToBeReceived })
   
       const oldUniform = await uniformModel.findOne({ standard });
       if (oldUniform) {
