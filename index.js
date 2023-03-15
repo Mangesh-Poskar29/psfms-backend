@@ -7,6 +7,8 @@ const principalController = require('./controller/principal')
 const staffUserController = require('./controller/staffUser')
 const userController = require('./controller/user')
 const uniformController = require('./controller/uniform')
+const bookController = require('./controller/book')
+const middaymealController= require('./controller/middaymeal')
 const cors = require("cors"); // Importing Cors
 
 const app = express()
@@ -81,6 +83,18 @@ app.post('/get-uniform-data', uniformController.getuniformdata )
 app.put('/update-uniform-data/:id', uniformController.updateuniformdata )
 app.delete('/delete-uniform-data/:id', uniformController.deleteuniformdata )
 app.post('/add-uniform-data', uniformController.adduniformdata )
+
+// Manage Book Facility Endpoints
+app.post('/add-book-data', bookController.addbookdata)
+app.post('/get-book-data', bookController.getbookdata)
+app.put('/update-book-data/:id', bookController.updatebookdata)
+app.delete('/delete-book-data/:id', bookController.deletebookdata )
+
+// Manage Mid-Day-Meal Facility Endpoints
+app.post('/add-middaymeal-data', middaymealController.addmiddaymealdata)
+app.post('/get-middaymeal-data', middaymealController.getmiddaymealdata)
+app.put('/update-middaymeal-data/:id', middaymealController.updatemiddaymealdata)
+app.delete('/delete-middaymeal-data/:id', middaymealController.deletemiddaymealdata )
 
 // Listening on port 
 app.listen(port, ()=>{
