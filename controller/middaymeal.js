@@ -15,13 +15,13 @@ module.exports.getmiddaymealdata = async (req, res) => {
 
 //Update MidDayMeal Data Endpoint
 module.exports.updatemiddaymealdata = async (req, res) => {
-  const { standard, totalstudents, wdays, tandul, turdal, mungdal, vatana, mataki, tel, tikhat, meeth, halad, jeera, mohari} = req.body
+  const { standard, totalstudents, wdays, tandul, turdal, mungdal, harbhara, mug, chavali, vatana, tel, tikhat, garamm, meeth, halad, jeera, mohari } = req.body
 
   const { id } = req.params;
 
   try {
 
-    const middaymealData = await middaymealModel.findByIdAndUpdate({ _id: id }, { $set: { standard: standard, totalstudents: totalstudents, wdays: wdays, tandul: tandul, turdal: turdal, mungdal: mungdal, vatana: vatana, mataki: mataki, tel: tel, tikhat: tikhat, meeth: meeth, halad: halad, jeera: jeera, mohari: mohari } })
+    const middaymealData = await middaymealModel.findByIdAndUpdate({ _id: id }, { $set: { standard: standard, totalstudents: totalstudents, wdays: wdays, tandul: tandul, turdal: turdal, mungdal: mungdal, harbhara: harbhara, mug: mug, chavali:chavali, vatana: vatana, tel: tel, tikhat: tikhat, garamm: garamm, meeth: meeth, halad: halad, jeera: jeera, mohari: mohari} })
 
     if (middaymealData) {
       return res.status(200).send({ msg: "Mid-Day-Meal Data Updated!" })
@@ -54,10 +54,10 @@ module.exports.deletemiddaymealdata = async (req, res) => {
 }
   // Add Mid-Day-Meal Record Endpoint
   module.exports.addmiddaymealdata = async (req, res) => {
-    const { standard, totalstudents, wdays, tandul, turdal, mungdal, vatana, mataki, tel, tikhat, meeth, halad, jeera, mohari } = req.body
+    const { standard, totalstudents, wdays, tandul, turdal, mungdal, harbhara, mug, chavali, vatana, tel, tikhat, garamm, meeth, halad, jeera, mohari } = req.body
   
     try {
-      const newMidDayMeal = new middaymealModel({ standard: standard, totalstudents: totalstudents, wdays: wdays, tandul: tandul, turdal: turdal, mungdal: mungdal, vatana: vatana, mataki: mataki, tel: tel, tikhat: tikhat, meeth: meeth, halad: halad, jeera: jeera, mohari: mohari })
+      const newMidDayMeal = new middaymealModel({ standard: standard, totalstudents: totalstudents, wdays: wdays, tandul: tandul, turdal: turdal, mungdal: mungdal, harbhara: harbhara, mug: mug, chavali:chavali, vatana: vatana, tel: tel, tikhat: tikhat, garamm: garamm, meeth: meeth, halad: halad, jeera: jeera, mohari: mohari })
   
       const oldMidDayMeal = await middaymealModel.findOne({ standard });
       if (oldMidDayMeal) {
